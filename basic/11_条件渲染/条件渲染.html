@@ -39,8 +39,16 @@
         <h1 v-if="n%3===0">Beijing</h1>
         <br>
         <h1 v-if="n%6===0">Guangzhou</h1>
-        <br>
         <h1 v-else-if="n%2===0">Shanghai</h1>
+        <!-- 不能加其他标签打断if-else结构，例如  -->
+        <h1 v-else>Hello~~~</h1>
+
+        <!-- template 与 v-if 的配合使用 (不能和v-show配合) -->
+        <template v-if="n === 2">
+            <h1>Hello~</h1>
+            <h1>Hello~~</h1>
+            <h1>Hello~~~</h1>         
+        </template>
 
     </div>
 
