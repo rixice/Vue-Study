@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.set的使用</title>
+    <script type="text/javascript" src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h1>school name: {{name}}</h1>
+        <h1>school address: {{address}}</h1>
+        <hr>
+        <h1>STUDENT INFO</h1>
+        <button @click="addSex">Add Sex (default: Man)</button>
+        <h2>student name: {{student.name}}</h2>
+        <h2>student sex: {{student.sex}}</h2>
+        <h2>student rAge: {{student.age.rAge}}</h2>
+        <h2>Friends:</h2>
+        <ul>
+            <li v-for="f in student.friends">{{f.name}} -- {{f.age}}</li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: '鱼窝头',
+                address: '广州',
+                student:{
+                    name: 'Tom',
+                    // sex: '男',
+                    age:{
+                        rAge: 40,
+                        sAge: 29,
+                    },
+                    friends:[
+                        {name:'jerry',age:35},
+                        {name:'tony',age:35},
+                    ]
+                }
+            },
+            methods: {
+                addSex(){
+                    Vue.set(this.student, 'sex', 'Man')
+                }
+            },
+        })
+    </script>
+</body>
+</html>
