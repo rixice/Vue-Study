@@ -46,7 +46,7 @@
             },
             methods: {
                 addSex(){
-                    vm.$set(vm._data.student, 'sex', 'Man')
+                    Vue.set(this.student, 'sex', 'Man')
                 }
             },
         })
