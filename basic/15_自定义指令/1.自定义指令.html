@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令</title>
+    <script type="text/javascript" src="../../js/vue.js"></script>
+</head>
+
+<!-- 
+    需求1：定义v-big指令，与v-text相似，但会把绑定的数值放大10倍；
+    需求2：定义一个v-fbind指令，与v-bind相似，但让其绑定的input默认聚焦；
+
+    自定义指令总结：
+        一、定义语法：
+            (1).局部指令：
+                new Vue({
+                    directives:{指令名:配置对象}
+                })
+            (2).全局指令：
+                Vue.directive(指令名，配置对象)
+
+        二、配置对象中常用的3个回调：
+            (1).bind: 指令与元素成功绑定时调用；
+            (2).inserted：指令所在元素被插入页面时调用；
+            (3).update：指令所在模板被重新解析时调用；
+
+        注：如果指令名是多个单词，要用 - 分割，大小写敏感
+ -->
+
+<body>
+    <div id="root">
+        <h2>当前的n：<span v-text="n"></span></h2>
+        <h2 >放大10倍的n值是：<span v-big="n"></span></h2>
+        <button @click="n++">点我n+1</button>
+        <hr>
+        <input type="text" v-fbind:value="n">
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        // 定义全局的，其他全局方法定义类似（不同容器都能用）
+        // Vue.directive('fbind',{
+        //     bind(element, binding){
+        //         element.value = binding.value
+        //         console.log('bind')
+        //     },  
+        //     inserted(element, binding){
+        //         element.focus()
+        //         console.log('inserted')
+        //     },   
+        //     update(element, binding){
+        //         element.value = binding.value
+        //         element.focus()
+        //         console.log('update')
+        //     }
+        // })
+
+        new Vue({
+            el: '#root',
+            data: {
+                n:1
+            },
+            directives:{
+                // big函数何时被调用？
+                // 1. 指令与元素成功绑定时（一开始）;
+                // 2. 指令所在的模板重新解析时；
+                big(HTMLelement, binding){
+                    HTMLelement.innerText = binding.value * 10
+                },
+
+                fbind: {
+                    // 当指令与元素绑定时调用
+                    bind(element, binding){
+                        element.value = binding.value
+                        console.log('bind')
+                    },  
+                    // 指令所在元素被插入页面时
+                    inserted(element, binding){
+                        element.focus()
+                        console.log('inserted')
+                    },   
+                    // 指令所在模板被重新解析时
+                    update(element, binding){
+                        element.value = binding.value
+                        element.focus()
+                        console.log('update')
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本使用</title>
+    <script type="text/javascript" src="../../js/vue.js"></script>
+</head>
+
+<!-- 
+    Vue中使用组件的三大步骤：
+        一、定义组件（创建组件）
+        二、注册组件
+        三、使用组件（写组件标签）
+    
+    一、如何定义一个组件？
+        使用Vue.extend(options)创建，其中options和new Vue(options)时传入的那个options几乎一样
+        区别如下：
+            1. el不要写 —— 所有组件最终都要通过一个vm管理
+            2. data必须写成函数 —— 避免被复用时，数据存在引用关系
+        
+    二、如何注册组件？
+            1. 局部注册：靠new Vue时传入components选项;
+            2. 全局注册：靠Vue.component('组件名'，组件);
+
+    三、编写组件标签：
+            <school></school>
+ -->
+
+<body>
+    <div id="root">
+        <!-- 编写组件标签 -->
+        <school>
+            <h2>学校名称：{{schoolName}}</h2>
+        </school>
+        <hr>
+        <div id="root2">
+            <student></student>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        Vue.component('student', student)   // 全局注册组件
+        // 创建school组件
+        const school = Vue.extend({
+            // el: '#root',     一定不要写el配置项，因为最终所有组件都归vm管理，由vm决定组件服务于谁
+            // template:
+            //     `
+            //     <div>
+            //         <h2>学校名称：{{schoolName}}</h2>
+            //         <h2>学校地址：{{schoolAdr}}</h2>
+            //     </div>
+            //     `
+            // ,
+            data(){
+                return {
+                    schoolName: "鱼窝头",
+                    schoolAdr: "广东",
+                }
+            }
+        })
+        
+        // 创建student组件
+        const student = Vue.extend({
+            data(){
+                return {
+                    studentName: "张三",
+                    studentAge: 18,
+                }
+            }
+        })
+
+
+        // 创建vm
+        new Vue({
+            el: '#root',
+            // 注册组件 (局部注册)
+            components:{
+                // school: school
+                school,  // 以上的简写
+            }
+        })
+
+        new Vue({
+            el: '#root2',
+        })
+
+    </script>
+</body>
+</html>
