@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 配置页签图标 -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico"></link>
+    <!-- 配置网页标题 -->
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+    <!-- 当浏览器不支持js时候 -->
+    <noscript>
+        <strong>不支持js</strong>
+    </noscript>
+    <!-- 容器 -->
+    <div id="root">
+        <App></App>
+    </div>
+</body>
+</html>
