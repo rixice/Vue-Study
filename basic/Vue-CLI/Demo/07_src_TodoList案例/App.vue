@@ -26,7 +26,7 @@
             :changeDone="changeDone"
             :deleteTodo="deleteTodo">
         </TodoList>
-
+        <hr>
         <TodoFooter 
             :handleAll="handleAll"
             :todoList="todoList"
@@ -50,13 +50,15 @@ export default {
     },
     data(){
         return {
-            todoList: [
-                {id:'001', todoName:'抽烟', isDone: false,},
-                {id:'002', todoName:'上课', isDone: false,},
-                {id:'003', todoName:'喝酒', isDone: true,},
-                {id:'004', todoName:'睡觉', isDone: false,},
-                {id:'005', todoName:'吃饭', isDone: false,},
-            ],
+            todoList: JSON.parse(localStorage.getItem('todoList')) || [],
+        }
+    },
+    watch: {
+        todoList:{
+            deep: true, // 开启深度监视，避免刷新后，勾选消失
+            handler(newVal){
+              localStorage.setItem('todoList', JSON.stringify(newVal))  
+            }
         }
     },
     methods: {
