@@ -26,7 +26,7 @@
             </div>
             
             <div class="search">
-                <input type="text" v-model="searchWord">
+                <input type="text" v-model="keyWord">
                 <button class="searchBtn" @click="goSearch">搜索</button>
             </div>
         </div>
@@ -39,7 +39,7 @@
         name: 'Header',
         data(){
             return {
-                searchWord: ''
+                keyWord: ''
             }
         },
         methods: {
@@ -50,7 +50,14 @@
                 this.$router.push('Register')
             },
             goSearch(){
-                this.$router.push('Search')
+                this.$router.push(
+                    {
+                        name: 'Search',
+                        query: {
+                            keyWord: this.keyWord
+                        }
+                    }
+                )
             },
             goHome(){
                 this.$router.push('Home')
