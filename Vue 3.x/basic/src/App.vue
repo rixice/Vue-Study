@@ -1,23 +1,25 @@
 <template>
   <h1>一个人的信息</h1>
-  <h3>姓名：{{name}}</h3>
-  <h3>年龄：{{age}}</h3>
-  <button @click="changeInfo">SayHello</button>
+  <h3 v-show="person.name">姓名：{{person.name}}</h3>
+  <button @click="addName">addName</button>
+  <button @click="delName">delName</button>
 </template>
-
 <script>
-  import {ref} from 'vue'
+  import {reactive} from 'vue'
   export default {
     name: 'App',
     setup(){
-      let name = ref('张三')
-      let age = ref(18)
+      const person = reactive({})
 
-      function changeInfo(){
-        name.value = '李四'
-        age.value = 15
+      function addName(){
+        person.name = '张三'
       }
-      return {name, age, changeInfo}
+
+      function delName(){
+        delete person.name
+      }
+
+      return {person, addName, delName}
     }
   }
 </script>
