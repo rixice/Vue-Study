@@ -6,34 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue3中的响应式原理</title>
 </head>
+
+<!-- 
+    Vue 3.0的响应式
+        实现原理：
+            通过 Proxy(代理)：拦截对象中任意属性的变化，包括: 属性值的读写、属性的添加/删除等等；
+            通过 Reflict(反射)：对源对象的属性进行操作；
+ -->
+
 <body>
     <script>
-        // 源数据
-        let person = {
-            name: '张三',
-            age: 18
-        }
+        // // 源数据
+        // let person = {
+        //     name: '张三',
+        //     age: 18
+        // }
 
-        // 模拟Vue3中实现的响应式
-        const p = new Proxy(person, {
-            // 有人 读取 p的某个属性时调用
-            get(target, propName){
-                console.log(`有人读取了p身上的${propName}`)
-                return target[propName]
-            },
-            // 有人 修改、追加 p的某个属性时调用
-            set(target, propName, value){
-                console.log(`有人修改了p身上的${propName}，我要去更新页面了`)
-                target[propName] = value
-                return target[propName]
-            },
-            // 有人 删除 p的某个属性时调用
-            deleteProperty(target, propName){
-                console.log(`有人删除了p身上的${propName}，我要去更新页面了`)
-                return delete target[propName]
-            }
-        }) 
+        // // 模拟Vue3中实现的响应式
+        // const p = new Proxy(person, {
+        //     // 有人 读取 p的某个属性时调用
+        //     get(target, propName){
+        //         console.log(`有人读取了p身上的${propName}`)
+        //         return target[propName]
+        //     },
+        //     // 有人 修改、追加 p的某个属性时调用
+        //     set(target, propName, value){
+        //         console.log(`有人修改了p身上的${propName}，我要去更新页面了`)
+        //         target[propName] = value
+        //         return target[propName]
+        //     },
+        //     // 有人 删除 p的某个属性时调用
+        //     deleteProperty(target, propName){
+        //         console.log(`有人删除了p身上的${propName}，我要去更新页面了`)
+        //         return delete target[propName]
+        //     }
+        // }) 
 
+        // let obj = {a:1, b:2}
+
+        // 通过 Object.defineProperty 去操作 (如果不用try catch，则会直接中断该线程)
+        // try {
+        //     Object.defineProperty(obj, "c", {
+        //         get(){
+        //             return 3
+        //         }
+        //     })
+        //     Object.defineProperty(obj, "c", {
+        //         get(){
+        //             return 4
+        //         }
+        //     })
+        // } catch (err) {
+        //     console.log(err)
+        // }
+
+        // 通过 Reflict.defineProperty 去操作
+        // const x1 = Object.defineProperty(obj, "c", {
+        //     get(){
+        //         return 3
+        //     }
+        // })
+        // console.log(x1)
+
+        // const x2 = Object.defineProperty(obj, "c", {
+        //     get(){
+        //         return 4
+        //     }
+        // })
+        // console.log(x2)
         
     </script>
 </body>
