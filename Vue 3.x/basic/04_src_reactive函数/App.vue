@@ -1,9 +1,9 @@
 <template>
   <h1>一个人的信息</h1>
-  <h3>工作种类: {{job.type}} | 工作薪水: {{job.salary}}</h3>
-  <h4>测试: {{job.a.b.c.d}}</h4>
+  <h3>工作种类: {{data.type}} | 工作薪水: {{data.salary}}</h3>
+  <h4>测试: {{data.a.b.c.d}}</h4>
   <ul>
-    <li v-for="h in hobby">{{h}}</li>
+    <li v-for="h in data.hobby">{{h}}</li>
   </ul>
   <button @click="changeInfo">SayHello</button>
 </template>
@@ -19,7 +19,22 @@
   export default {
     name: 'App',
     setup(){
-      const job = reactive({
+      // const job = reactive({
+      //   type: '前端工程师',
+      //   salary: '40K',
+      //   a:{
+      //     b:{
+      //       c:{
+      //         d:666
+      //       }
+      //     }
+      //   },
+      // })
+
+      // const hobby = reactive(['学习', '睡觉', '打游戏'])
+      
+      // 也可以这样！
+      let data = reactive({
         type: '前端工程师',
         salary: '40K',
         a:{
@@ -29,17 +44,16 @@
             }
           }
         },
+        hobby: ['学习', '睡觉', '打游戏'],
       })
 
-      const hobby = reactive(['学习', '睡觉', '打游戏'])
-
       function changeInfo(){
-        job.type = '运维工程师',
-        job.salary = '35K'
-        job.a.b.c.d = 999
-        hobby[2] = '看电影'
+        data.type = '运维工程师',
+        data.salary = '35K'
+        data.a.b.c.d = 999
+        data.hobby[2] = '看电影'
       }
-      return {hobby, job, changeInfo}
+      return {data, changeInfo}
     }
   }
 </script>
