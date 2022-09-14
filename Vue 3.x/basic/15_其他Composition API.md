@@ -4,7 +4,7 @@
 ### shallowRef  
 只处理 基本数据类型 的响应式，不进行对象的响应式处理  
 ### 什么时候使用？  
-如果有一个对象数据，结构较深，但变化的只有外层属性 ===> shallowReactive
+如果有一个对象数据，结构较深，但变化的只有外层属性 ===> shallowReactive  
 如果有一个对象数据，后续不进行修改 ===> shallowRef  
 ---
 # readonly 与 shallowReadonly
