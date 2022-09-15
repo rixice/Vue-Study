@@ -13,6 +13,8 @@
         语法：const name = toRef(person, 'name')
         应用：要将响应式对象中的某个属性单独提供给外部使用时
         扩展：toRefs 与 toRef 功能一致，但可批量创建
+
+    注意：toRefs只执行一次，如果模板初始化要渲染一个不存在的属性，会出现警告！
  -->
 
 <script>
