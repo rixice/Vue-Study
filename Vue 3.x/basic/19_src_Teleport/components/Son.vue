@@ -1,18 +1,16 @@
 <template>
     <div class="son">
         <h4>我是Son组件 (孙子)</h4>
+        <Dialog></Dialog>
     </div>
 </template>
 
 <script>
-    import { inject } from 'vue';
+import Dialog from './Dialog.vue';
     export default {
-        name: 'Son',
-        setup(){
-            let car = inject('car')
-            console.log(car)
-        }
-    }
+    name: "Son",
+    components: { Dialog }
+}
 </script>
 
 <style scoped>

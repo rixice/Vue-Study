@@ -22,6 +22,7 @@
     //      但在setup中不能访问到Vue2.x的配置
     //      如果有重名，setup优先
     //      setup不能是一个async函数，因为返回值是promise
+    //      (后期) 也可以返回一个Promise实例，但需要 Suspense和异步组件配合
     setup(){
       // 数据
       let name = '张三'

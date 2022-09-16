@@ -6,12 +6,11 @@
 </template>
 
 <script>
-    import { inject } from 'vue';
     import Son from './Son.vue';
     export default {
     name: "Child",
     setup() {
-        console.log(inject('car'))
+        
     },
     components: { Son }
 }
